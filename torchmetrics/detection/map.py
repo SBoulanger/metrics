@@ -656,7 +656,7 @@ class MeanAveragePrecision(Metric):
         fp_sum = torch.cumsum(fps, axis=1, dtype=torch.float)
         for idx, (tp, fp) in enumerate(zip(tp_sum, fp_sum)):
             nd = len(tp)
-            rc = tp / npig
+            rc = tp / npig.to(tp.device)
             pr = tp / (fp + tp + torch.finfo(torch.float64).eps)
             prec = torch.zeros((nb_rec_thrs,))
             score = torch.zeros((nb_rec_thrs,))
